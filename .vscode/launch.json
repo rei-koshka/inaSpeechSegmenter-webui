@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "webui",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "cwd": "${workspaceFolder}/src",
+      "args": [
+        "run",
+        "app.py"
+      ],
+      "env": {
+        "INA_SPEECH_SEGMENTER_API_URL": "http://127.0.0.1:8888"
+      }
+    }
+  ]
+}

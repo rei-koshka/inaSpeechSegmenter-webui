@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  webui:
+    container_name: ina-speech-segmenter-webui
+    image: ina-speech-segmenter-webui:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    networks:
+      - ina_speech_segmenter
+    depends_on:
+      - api
+    environment:
+      - INA_SPEECH_SEGMENTER_API_URL=http://api:8888
+      - INA_SPEECH_SEGMENTER_WEBUI_LOG_LEVEL=DEBUG
+
+  api:
+    container_name: ina-speech-segmenter-api
+    image: ghcr.io/danand/inaspeechsegmenter-api:0.1.2
+    ports:
+      - "8888:8888"
+    networks:
+      - ina_speech_segmenter
+    environment:
+      - INA_SPEECH_SEGMENTER_API_LOG_LEVEL=DEBUG
+
+networks:
+  ina_speech_segmenter:
+    driver: bridge
