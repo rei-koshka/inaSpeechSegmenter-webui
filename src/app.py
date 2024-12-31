@@ -1,6 +1,7 @@
 from inaSpeechSegmenter_webui.helpers import get_gendered_segments_overall
 from inaSpeechSegmenter_client.segmenter_client import SegmenterClient
 
+import sys
 import logging
 
 from os import environ
@@ -11,12 +12,17 @@ import streamlit as st
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 api_url = environ.get("INA_SPEECH_SEGMENTER_API_URL", "http://127.0.0.1:8888")
-log_level = environ.get("INA_SPEECH_SEGMENTER_WEBUI_LOG_LEVEL", "DEBUG")
+log_level_str = environ.get("INA_SPEECH_SEGMENTER_WEBUI_LOG_LEVEL", "DEBUG")
 
-logger = logging.Logger(
-    name=__name__,
-    level=getattr(logging, log_level),
+log_level = getattr(logging, log_level_str)
+
+logging.basicConfig(
+    level=log_level,
+    format="%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d) %(funcName)s() - %(message)s",
+    stream=sys.stdout,
 )
+
+logger = logging.getLogger(__name__)
 
 segmenter_client = SegmenterClient(
     api_url=api_url,
