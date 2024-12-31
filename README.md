@@ -1,4 +1,4 @@
-# `inaSpeechSegmenter` API client
+# `inaSpeechSegmenter` Web UI
 
 This Web UI for the [`inaSpeechSegmenter`](https://github.com/ina-foss/inaSpeechSegmenter) built with [Streamlit](https://github.com/streamlit/streamlit). It serves as a demonstration application wrapper around the original `inaSpeechSegmenter` toolkit, providing a convenient interface for integrating its features into your own applications.
 
